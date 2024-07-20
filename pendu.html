@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+	<head>
+	<meta charset="UTF-8" >
+	<style>
+		.titre {border-radius:9px; left:25%; position:absolute; font-family:Hello ;width:50%; font-size:4.5em; background-color:red; color:white; height:110px; text-align:center; padding-top:20px;}
+		#vie { color:red; font-size:4em;; font-family:Ribbon 131; font-weight:bold; display:inline;}
+		img { width:3em;}
+		center {position:absolute; top:50%;width:50%; left:25%;}
+		#mot {width:70%;font-size:8em; background-color:#ff4500; color:white; border-radius:10px;}
+		#c {width:55px; height:60px; font-size:60px; background-color:#FEAB30;  border:none;}
+		#butt:hover {background-color:black;}
+		#butt {letter-spacing:3px; font-family: Akira Jimbo; font-size:50px; background-color:#ff4500; color:white; border-radius:10px; border:none;}
+		span {position:absolute; top:170px; right:25%;}
+		#start {letter-spacing:3px; left:26%; position:absolute; font-family: Akira Jimbo; top:185px;font-size:50px; background-color:#ff4500; color:white; border-radius:10px; border:none;}
+		#start:hover {background-color:black;}
+		#guess {letter-spacing:2px; left:41%; text-align:center; position:absolute; width:20%; font-family: Akira Jimbo; top:250px;font-size:40px; background-color:#ff4500; color:white; border-radius:10px;}
+		#utils { right:25%; text-align:center; position:absolute; width:20%; top:530px; font-size:25px;}
+		
+	</style>
+	
+	
+	</head>
+
+	<body>
+		<div class="titre"> Jeu de pendu </div>
+		<div id="guess">guess the word</div>
+		<div id="utils">lettres incorrect : </div>
+		
+		<span>
+			<img src="./coeur.png" >
+			<div id="vie">10</div>
+		</span>
+		<input type="submit" id="start" value="start">
+		<center>
+		<div id="mot">-----</div></br>
+		<input type="text" id="c" maxlength="1" placeholder="'a'"> </br> </br>
+		<input type="submit" id="butt" value="test">
+		</center>
+	
+	
+	<script>
+	
+	
+	
+	var ut="lettres incorrect : "
+	var hayat=10
+	var v=document.getElementById("vie");
+	var b=document.getElementById("butt");
+	var m=document.getElementById("mot");
+	var s=document.getElementById("start");
+	var g=document.getElementById("guess");
+	var u=document.getElementById("utils");
+	
+	s.addEventListener("click",(event) => {
+		
+		location.reload();
+	});	
+	
+	
+	
+	function getRandomSubArray(array2D) {
+    const randomIndex = Math.floor(Math.random() * array2D.length);
+    return array2D[randomIndex];
+	}
+
+	const array2D =[['s','k','y'], ['d','o','g'], ['f','i','s','h'], ['t','r','e','e'], ['b','i','r','d'],
+    ['c','o','w'], ['s','u','n'], ['m','o','o','n'], ['s','t','a','r'], ['p','l','a','n','e'],
+    ['c','a','r'], ['t','r','u','c','k'], ['b','o','a','t'], ['s','h','i','p'], ['t','r','a','i','n'],
+    ['b','u','s'], ['b','i','k','e'], ['r','o','a','d'], ['b','r','i','d','g','e'], ['h','o','u','s','e'],
+    ['b','u','i','l','d','i','n','g'], ['w','i','n','d','o','w'], ['d','o','o','r'], ['f','e','n','c','e'],
+    ['w','a','l','l'], ['r','o','o','m'], ['c','h','a','i','r'], ['t','a','b','l','e'], ['b','e','d'],
+    ['s','o','f','a'], ['s','h','e','l','f'], ['c','o','m','p','u','t','e','r'], ['l','a','m','p'], ['b','o','o','k'],
+    ['p','e','n'], ['p','a','p','e','r'], ['p','h','o','n','e'], ['c','a','m','e','r','a'], ['w','a','t','c','h'],
+    ['c','l','o','c','k'], ['r','a','d','i','o'], ['t','v'], ['f','r','i','d','g','e'], ['s','t','o','v','e'],
+    ['o','v','e','n'], ['m','i','c','r','o','w','a','v','e'], ['s','i','n','k'], ['f','a','u','c','e','t'], ['p','l','a','t','e'],
+    ['c','u','p'], ['f','o','r','k'], ['s','p','o','o','n'], ['k','n','i','f','e'], ['p','a','n'],
+    ['p','o','t'], ['s','p','a','t','u','l','a'], ['b','o','w','l'], ['c','a','n'], ['j','a','r'],
+    ['l','i','d'], ['p','i','t','c','h','e','r'], ['g','l','a','s','s'], ['b','o','t','t','l','e'], ['b','a','g'],
+    ['s','h','i','r','t'], ['p','a','n','t','s'], ['s','h','o','e'], ['s','o','c','k'], ['h','a','t'],
+    ['c','o','a','t'], ['j','a','c','k','e','t'], ['s','w','e','a','t','e','r'], ['s','c','a','r','f'], ['g','l','o','v','e'],
+    ['b','r','a','c','e','l','e','t'], ['n','e','c','k','l','a','c','e'], ['r','i','n','g'], ['e','a','r','r','i','n','g'], ['b','e','l','t'],
+    ['z','i','p','p','e','r'], ['b','u','t','t','o','n'], ['s','n','a','p'], ['h','o','o','d'], ['c','o','l','l','a','r'],
+    ['p','o','c','k','e','t'], ['s','e','a','m'], ['s','t','i','t','c','h'], ['h','e','m'], ['f','a','b','r','i','c']];
+
+	var secret2 = getRandomSubArray(array2D);
+	trouve=[];
+	for(i=0;i<secret2.length;i++){
+    trouve[i]='-';
+	};
+	
+	var secret=secret2.join('');
+	var i;
+	
+	m.innerText=trouve.join('');
+	
+	
+	
+	b.addEventListener("click",(event) => {
+		if(trouve.join('')==secret){
+			location.reload();
+		}
+		
+		
+		
+		if(hayat==0){
+			location.reload();
+		}
+		
+		
+		
+		
+		var pos=-1;
+		var c=document.getElementById("c").value;
+		
+		for(i=0 ; i < secret2.length ; i++){
+			if(secret2[i]==c){
+				pos=i;
+			}
+		}
+		
+		if(pos==-1){
+			hayat--;
+			ut=ut+c+',';
+			
+		}else{
+			trouve[pos]=c;
+			secret2[pos]="-";
+		
+		}	
+		
+		
+		v.innerText=hayat;
+		m.innerText=trouve.join('');
+		u.innerText=ut;
+		
+		if(trouve.join('')==secret){
+			m.style.fontSize="4em";
+			m.innerText="felicitation !";
+			m.style.backgroundColor="green";
+			g.innerText=secret;
+			g.style.backgroundColor="green";
+		}
+		
+		if(v.innerText==0){
+			m.style.fontSize="4em";
+			m.innerText="game over :(";
+			m.style.backgroundColor="black";
+			g.innerText=secret;
+			g.style.backgroundColor="green";
+		
+		}
+	})
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</script>
+	
+	
+	
+	
+	</body>
+
+
+</html>
